@@ -73,7 +73,7 @@ const
 var
   INI: INIFile;
   LogFile: String = '\rdpwrap.txt';
-  bw: {$if CompilerVersion>=16} NativeUInt {$else} DWORD {$endif};
+  bw: {$if CompilerVersion>=22} NativeUInt {$else} DWORD {$ifend};
   IsHooked: Boolean = False;
 
 // Unhooked import
