@@ -1,6 +1,6 @@
 @echo off
 if not exist "%~dp0RDPWInst.exe" goto :error
-"%~dp0RDPWInst" -w
+"%~dp0RDPWInst" -w -k
 echo.
 goto :anykey
 :error

@@ -1033,6 +1033,15 @@ begin
       Writeln('[*] Your INI file is newer than public file. Are you a developer? :)');
 end;
 
+procedure CheckWaitForKey;
+begin
+  if Pos('-k', CmdLine) > 0 then
+  begin
+    Writeln('Press any key to close');
+    Readln;
+  end;
+end;
+
 var
   I: Integer;
 begin
@@ -1059,18 +1068,21 @@ begin
     Writeln('-w          get latest update for INI file');
     Writeln('-u          uninstall wrapper');
     Writeln('-r          force restart Terminal Services');
+    Writeln('-k          keep console window open');
     Exit;
   end;
 
   if ParamStr(1) = '-l' then
   begin
     Writeln(ExtractResText('license'));
+    CheckWaitForKey;
     Exit;
   end;
 
   if not SupportedArchitecture then
   begin
     Writeln('[-] Unsupported processor architecture.');
+    CheckWaitForKey;
     Exit;
   end;
 
@@ -1081,6 +1093,7 @@ begin
     if Installed then
     begin
       Writeln('[*] RDP Wrapper Library is already installed.');
+      CheckWaitForKey;
       Halt(ERROR_INVALID_FUNCTION);
     end;
     Writeln('[*] Notice to user:');
@@ -1138,6 +1151,7 @@ begin
     if not Installed then
     begin
       Writeln('[*] RDP Wrapper Library is not installed.');
+      CheckWaitForKey;
       Halt(ERROR_INVALID_FUNCTION);
     end;
     Writeln('[*] Uninstalling...');
@@ -1181,6 +1195,7 @@ begin
     if not Installed then
     begin
       Writeln('[*] RDP Wrapper Library is not installed.');
+      CheckWaitForKey;
       Halt(ERROR_INVALID_FUNCTION);
     end;
     Writeln('[*] Checking for updates...');
@@ -1206,4 +1221,6 @@ begin
 
     Writeln('[+] Done.');
   end;
+  CheckWaitForKey;
 end.
+
